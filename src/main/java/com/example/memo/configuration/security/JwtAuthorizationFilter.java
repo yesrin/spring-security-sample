@@ -33,11 +33,12 @@ class JwtAuthorizationFilter extends OncePerRequestFilter {
 
 		// TODO : 요청에 들어온 JWT를 parsing해서 "ROLE_MEMBER" 권한이 있는지 확인하고, SecurityContextHolder에 context 설정하기
 
-		//권한있는지 확인
+		//헤더에서 토큰 가져오기
 		String tokenValue = jwtUtil.getTokenFromHeader(request);
 
 		if (StringUtils.hasText(tokenValue)) {
 
+			//권한있는지 확인
 			if (!jwtUtil.validateToken(tokenValue)) {
 				log.error("Token Error");
 				return;
@@ -52,6 +53,7 @@ class JwtAuthorizationFilter extends OncePerRequestFilter {
 				return;
 			}
 		}
+
 
 	}
 
